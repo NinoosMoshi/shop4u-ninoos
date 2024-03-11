@@ -8,9 +8,10 @@ import com.ninos.model.dto.ProductDTO;
 
 public interface ProductService {
 
-     ProductDTO getProductById(Long productId);
+//     ProductDTO getProductById(Long productId);
 
-//     List<ProductDTO> getAllProducts();
      Page<ProductDTO> getAllProducts(int page, int size);
+
+     Page<ProductDTO> getProductsByBrandId(Long id, int page, int size);
 
 }

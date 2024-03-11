@@ -40,7 +40,7 @@ public class ProjectSecurityConfig {
 
         http.authorizeHttpRequests((authorize) ->
                 authorize
-                        .requestMatchers("/api/shop/categories","/api/shop/brands","/api/shop/products","/api/shop/products/**").permitAll());
+                        .requestMatchers("/api/shop/categories","/api/shop/brands","/api/shop/**", "/api/shop/products","/api/shop/products/**").permitAll());
         //.requestMatchers("/api/shop/categories").authenticated());
         // .httpBasic(Customizer.withDefaults())
         //.formLogin(Customizer.withDefaults());

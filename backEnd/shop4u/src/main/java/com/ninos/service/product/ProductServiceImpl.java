@@ -24,21 +24,16 @@ public class ProductServiceImpl implements ProductService{
     private final ProductMapper productMapper;
 
 
-    @Override
-    public ProductDTO getProductById(Long productId) {
-        Optional<Product> product = productRepository.findById(productId);
-        if(product.isPresent()){
-          return productMapper.productEntityToDto(product.get());
-        }
-        return null;
-    }
-
-
 //    @Override
-//    public List<ProductDTO> getAllProducts() {
-//        List<Product> productList = productRepository.findAll();
-//        return productList.stream().map(product -> productMapper.productEntityToDto(product)).collect(Collectors.toList());
+//    public ProductDTO getProductById(Long productId) {
+//        Optional<Product> product = productRepository.findById(productId);
+//        if(product.isPresent()){
+//          return productMapper.productEntityToDto(product.get());
+//        }
+//        return null;
 //    }
+
+
     @Override
     public Page<ProductDTO> getAllProducts(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -47,7 +42,12 @@ public class ProductServiceImpl implements ProductService{
     }
 
 
-
+    @Override
+    public Page<ProductDTO> getProductsByBrandId(Long id, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<Product> productsByBrandId = productRepository.findByBrandBrandId(id, pageRequest);
+        return new PageImpl<>(productsByBrandId.getContent().stream().map(product -> productMapper.productEntityToDto(product)).collect(Collectors.toList()), pageRequest, productsByBrandId.getTotalElements());
+    }
 
 
 }

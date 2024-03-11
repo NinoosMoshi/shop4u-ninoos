@@ -41,7 +41,7 @@ public class ProductController {
     }
 
 
-    // http://localhost:8080/api/v1/brands
+    // http://localhost:8080/api/shop/brands
     @GetMapping("/brands")
     public Page<BrandDTO> getBrands(@RequestParam(name = "page", defaultValue = "0") int page,
                                     @RequestParam(name = "size", defaultValue = "10") int size){
@@ -49,11 +49,19 @@ public class ProductController {
     }
 
 
-    // http://localhost:8080/api/v1/categories
+    // http://localhost:8080/api/shop/categories
     @GetMapping("/categories")
     public Page<CategoryDTO> getCategories(@RequestParam(name = "page", defaultValue = "0") int page,
                                            @RequestParam(name = "size", defaultValue = "10") int size){
         return categoryService.getAllCategories(page, size);
+    }
+
+    // http://localhost:8080/api/shop?id=<brandId>
+    @GetMapping()
+    public Page<ProductDTO> productsByBrandId(@RequestParam Long id,
+                                              @RequestParam(name = "page", defaultValue = "0") int page,
+                                              @RequestParam(name = "size", defaultValue = "10") int size){
+        return productService.getProductsByBrandId(id, page, size);
     }
 
 
